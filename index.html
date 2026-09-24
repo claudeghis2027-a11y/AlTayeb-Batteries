@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الطيب للبطاريات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- الدخول: البطاقة هنا هي البطاقة الوحيدة الفعلية. الخلفية (لو وُجدت) صورة فقط. -->
+  <section id="loginView" class="login-view" hidden>
+    <div class="login-card">
+      <div class="brand brand-lg">
+        <svg class="mark" viewBox="0 0 64 44" aria-hidden="true">
+          <rect x="10" y="2" width="12" height="7" rx="1.5" class="t-pos"/>
+          <rect x="42" y="2" width="12" height="7" rx="1.5" class="t-neg"/>
+          <rect x="3" y="8" width="58" height="33" rx="5" fill="none" stroke="currentColor" stroke-width="3.5"/>
+          <path d="M11 24.5h10M16 19.5v10" class="s-pos"/>
+          <path d="M43 24.5h10" class="s-neg"/>
+        </svg>
+        <h1>الطيب للبطاريات</h1>
+      </div>
+      <form id="loginForm" novalidate>
+        <label class="field"><span>اسم المستخدم</span>
+          <input id="loginUser" name="username" autocomplete="username" dir="ltr" required></label>
+        <label class="field"><span>كلمة المرور</span>
+          <input id="loginPass" name="password" type="password" autocomplete="current-password" dir="ltr" required></label>
+        <p id="loginError" class="form-error" role="alert" hidden></p>
+        <button type="submit" id="loginBtn" class="btn btn-primary btn-block">دخول</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="appView" hidden>
+    <header class="topbar">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 64 44" aria-hidden="true">
+          <rect x="10" y="2" width="12" height="7" rx="1.5" class="t-pos"/>
+          <rect x="42" y="2" width="12" height="7" rx="1.5" class="t-neg"/>
+          <rect x="3" y="8" width="58" height="33" rx="5" fill="none" stroke="currentColor" stroke-width="3.5"/>
+          <path d="M11 24.5h10M16 19.5v10" class="s-pos"/>
+          <path d="M43 24.5h10" class="s-neg"/>
+        </svg>
+        <span class="brand-name">الطيب للبطاريات</span>
+      </div>
+      <div class="who">
+        <span id="whoName" class="who-name"></span>
+        <span id="whoRole" class="role-chip"></span>
+        <button id="logoutBtn" class="btn btn-ghost">خروج</button>
+      </div>
+    </header>
+    <div class="layout">
+      <nav id="sidebar" class="sidebar" aria-label="القائمة الرئيسية"></nav>
+      <main id="page" class="page" tabindex="-1"></main>
+    </div>
+  </section>
+
+  <div id="boot" class="boot">جارٍ التحميل…</div>
+  <div id="modalRoot"></div>
+  <div id="toastRoot" class="toasts" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/crud.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/items.js"></script>
+  <script src="js/customers.js"></script>
+  <script src="js/suppliers.js"></script>
+  <script src="js/employees.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/audit.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
