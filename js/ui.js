@@ -11,6 +11,17 @@ const UI = {
     return isFinite(v) ? v.toLocaleString('ar-EG-u-nu-latn', { maximumFractionDigits: 2 }) : '—';
   },
 
+  qty(n) {
+    const v = Number(n) || 0;
+    return v.toLocaleString('ar-EG-u-nu-latn');
+  },
+
+  /** تاريخ اليوم بتوقيت الجهاز yyyy-mm-dd (قيمة افتراضية فقط — الخادم يتحقق) */
+  today() {
+    const d = new Date();
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  },
+
   date(iso) {
     if (!iso) return '—';
     const d = new Date(iso);
