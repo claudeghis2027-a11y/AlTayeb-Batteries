@@ -46,7 +46,7 @@ a { color: #8fc0f0; }
 .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; }
 .checks label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .checks input { width: 18px; height: 18px; accent-color: var(--yellow); }
-.form-error { color: var(--danger); background: rgba(229, 103, 90, .1); border-radius: 6px; padding: 8px 12px; margin: 0 0 16px; }
+.form-error { white-space: pre-line; color: var(--danger); background: rgba(229, 103, 90, .1); border-radius: 6px; padding: 8px 12px; margin: 0 0 16px; }
 .req { color: var(--yellow); }
 
 /* الأزرار */
@@ -142,3 +142,42 @@ tr.fail td:first-child { box-shadow: inset -3px 0 0 var(--danger); }
 .toast.err { border-right-color: var(--danger); }
 .boot { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); background: var(--bg); z-index: 40; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* ---------- Phase 2: المخزون وأذون النقل ---------- */
+.head-actions { display: flex; gap: 10px; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-blue:hover:not(:disabled) { background: #5a9fe6; }
+tr.clickable { cursor: pointer; }
+tr.clickable:hover td { background: rgba(61, 143, 224, .07); }
+td.zero { color: #6c7379; }
+.strong { font-weight: 700; }
+th.hl, td.hl { background: rgba(242, 194, 48, .08); }
+th.hl { color: var(--yellow); }
+tfoot td { font-weight: 700; background: var(--raised); border-top: 1px solid var(--line); border-bottom: 0; }
+table.inv td.num, table.inv th.num { width: 11%; }
+.sub-head { font-size: 17px; margin: 22px 0 10px; }
+.stats-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.stat-total { border-bottom-color: var(--yellow); }
+.stat-total b { color: var(--yellow); }
+.modal-wide { width: 1000px; }
+.modal-wide .table-wrap { max-height: 50vh; overflow-y: auto; }
+.st-draft { background: var(--blue-soft); color: #8fc0f0; }
+.st-posted { background: rgba(76, 183, 130, .15); color: var(--ok); }
+.st-cancelled { background: rgba(161, 167, 173, .15); color: var(--muted); }
+.filters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 14px; align-items: end; }
+.filters label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--muted); }
+.filters input, .filters select { min-height: 42px; padding: 0 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; color: var(--text); }
+input[type=date] { color-scheme: dark; }
+.doc-form { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0 14px; }
+.doc-form .wide, .doc-grid .wide { grid-column: 1 / -1; }
+.doc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px; }
+.doc-grid > div { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px 14px; }
+.doc-grid span { display: block; color: var(--muted); font-size: 13px; }
+.doc-actions { display: flex; gap: 10px; margin-top: 18px; }
+.note { color: var(--muted); margin: -6px 0 16px; }
+.hint-line { color: var(--muted); font-size: 14px; margin: 8px 0 0; }
+table.lines td { padding: 8px 12px; }
+.num-in { text-align: left; }
+tr.bad .cell { border-color: var(--danger); }
+tr.bad td { border-bottom: 0; }
+tr.line-msg td { padding: 0 12px 10px; color: var(--danger); font-size: 14px; }
