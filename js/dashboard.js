@@ -17,6 +17,14 @@ const DashboardPage = {
     const noPrice = d.counts.itemsWithoutPrice
       ? `<p class="notice">${d.counts.itemsWithoutPrice} صنف نشط بدون سعر بيع. حدّد الأسعار من شاشة الأصناف.</p>` : '';
 
-    body.innerHTML = (cards ? `<div class="stats">${cards}</div>` : '<p class="muted">لا توجد بيانات متاحة لصلاحياتك الحالية.</p>') + noPrice;
+    // Phase 2: أرصدة المخزون (محسوبة في الخادم من حركات المخزون)
+    const stock = d.stock ? `
+      <h3 class="sub-head">البطاريات في المخزون</h3>
+      <div class="stats stats-5">${d.stock.locations.map(l => `
+        <a class="stat" href="#inventory"><span>${UI.esc(l.LocationName)}</span><b>${UI.esc(UI.qty(d.stock.totals[l.LocationID]))}</b><small>بطارية</small></a>`).join('')}
+        <a class="stat stat-total" href="#inventory"><span>إجمالي المخزون</span><b>${UI.esc(UI.qty(d.stock.grandTotal))}</b><small>بطارية</small></a>
+      </div>` : '';
+
+    body.innerHTML = (cards ? `<div class="stats">${cards}</div>` : (stock ? '' : '<p class="muted">لا توجد بيانات متاحة لصلاحياتك الحالية.</p>')) + noPrice + stock;
   }
 };
