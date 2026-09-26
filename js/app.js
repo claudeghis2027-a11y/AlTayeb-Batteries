@@ -6,6 +6,9 @@ const NAV = [
   { id: 'customers', label: 'العملاء',      perm: 'VIEW_CUSTOMERS', page: CustomersPage },
   { id: 'suppliers', label: 'الموردين',     perm: 'VIEW_SUPPLIERS', page: SuppliersPage },
   { id: 'employees', label: 'الموظفين',     perm: 'VIEW_EMPLOYEES', page: EmployeesPage },
+  { id: 'inventory', label: 'المخزون',      perm: 'VIEW_INVENTORY', page: () => InventoryPage },
+  { id: 'movements', label: 'حركة المخزون', perm: 'VIEW_INVENTORY', page: () => MovementsPage, hidden: true },
+  { id: 'transfers', label: 'إذن نقل / صرف', perm: 'VIEW_TRANSFERS', page: () => TransfersPage },
   { id: 'users',     label: 'المستخدمين',   perm: 'VIEW_USERS',     page: UsersPage },
   { id: 'settings',  label: 'الإعدادات',    perm: 'MANAGE_SETTINGS', page: () => SettingsPage },
   { id: 'audit',     label: 'سجل العمليات', perm: 'VIEW_AUDIT',     page: () => AuditPage }
@@ -14,7 +17,8 @@ const NAV = [
 /** نفس قاعدة الخادم للعرض فقط: MANAGE_X تتضمن VIEW_X */
 const IMPLIES = {
   MANAGE_ITEMS: ['VIEW_ITEMS'], MANAGE_CUSTOMERS: ['VIEW_CUSTOMERS'], MANAGE_SUPPLIERS: ['VIEW_SUPPLIERS'],
-  MANAGE_EMPLOYEES: ['VIEW_EMPLOYEES'], MANAGE_USERS: ['VIEW_USERS']
+  MANAGE_EMPLOYEES: ['VIEW_EMPLOYEES'], MANAGE_USERS: ['VIEW_USERS'],
+  CREATE_TRANSFER: ['VIEW_TRANSFERS'], EDIT_TRANSFER: ['VIEW_TRANSFERS'], POST_TRANSFER: ['VIEW_TRANSFERS'], CANCEL_TRANSFER: ['VIEW_TRANSFERS']
 };
 
 const App = {
@@ -38,23 +42,26 @@ const App = {
     document.getElementById('appView').hidden = false;
     document.getElementById('whoName').textContent = user.displayName;
     document.getElementById('whoRole').textContent = user.role === 'ADMIN' ? 'مدير' : 'مستخدم';
-    document.getElementById('sidebar').innerHTML = NAV.filter(n => this.can(n.perm)).map(n =>
+    document.getElementById('sidebar').innerHTML = NAV.filter(n => !n.hidden && this.can(n.perm)).map(n =>
       `<a class="nav-link" href="#${n.id}" data-nav="${n.id}">${UI.esc(n.label)}</a>`).join('');
     this.route();
   },
 
   route() {
-    const id = (location.hash || '#home').slice(1);
+    // #page أو #page/arg (مثال: #transfers/new ، #transfers/TRF-000001)
+    const [id, ...rest] = decodeURIComponent((location.hash || '#home').slice(1)).split('/');
+    const arg = rest.join('/');
     const root = document.getElementById('page');
     document.getElementById('modalRoot').innerHTML = '';
-    document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('active', a.dataset.nav === id));
+    const navId = id === 'movements' ? 'inventory' : id;
+    document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('active', a.dataset.nav === navId));
     const nav = NAV.find(n => n.id === id) || NAV[0];
     if (!this.can(nav.perm)) {
       root.innerHTML = '<div class="empty err">ليس لديك صلاحية لفتح هذه الصفحة.</div>';
       return;
     }
     root.innerHTML = '';
-    nav.page().mount(root);
+    nav.page().mount(root, arg);
     root.focus();
   }
 };
