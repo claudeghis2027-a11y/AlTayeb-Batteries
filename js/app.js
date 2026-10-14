@@ -9,6 +9,10 @@ const NAV = [
   { id: 'inventory', label: 'المخزون',      perm: 'VIEW_INVENTORY', page: () => InventoryPage },
   { id: 'movements', label: 'حركة المخزون', perm: 'VIEW_INVENTORY', page: () => MovementsPage, hidden: true },
   { id: 'transfers', label: 'إذن نقل / صرف', perm: 'VIEW_TRANSFERS', page: () => TransfersPage },
+  { id: 'opening',   label: 'أرصدة أول المدة', perm: 'VIEW_OPENING', page: () => OpeningPage },
+  { id: 'balances',  label: 'أرصدة العملاء والموردين', perm: 'VIEW_PARTY_BALANCES', page: () => BalancesPage },
+  { id: 'adjust',    label: 'تسوية أرصدة أول المدة', perm: 'VIEW_OPENING', page: () => AdjustPage, hidden: true },
+  { id: 'costs',     label: 'تكاليف غير معروفة', perm: 'RESOLVE_COST', page: () => CostsPage, hidden: true },
   { id: 'users',     label: 'المستخدمين',   perm: 'VIEW_USERS',     page: UsersPage },
   { id: 'settings',  label: 'الإعدادات',    perm: 'MANAGE_SETTINGS', page: () => SettingsPage },
   { id: 'audit',     label: 'سجل العمليات', perm: 'VIEW_AUDIT',     page: () => AuditPage }
@@ -18,7 +22,8 @@ const NAV = [
 const IMPLIES = {
   MANAGE_ITEMS: ['VIEW_ITEMS'], MANAGE_CUSTOMERS: ['VIEW_CUSTOMERS'], MANAGE_SUPPLIERS: ['VIEW_SUPPLIERS'],
   MANAGE_EMPLOYEES: ['VIEW_EMPLOYEES'], MANAGE_USERS: ['VIEW_USERS'],
-  CREATE_TRANSFER: ['VIEW_TRANSFERS'], EDIT_TRANSFER: ['VIEW_TRANSFERS'], POST_TRANSFER: ['VIEW_TRANSFERS'], CANCEL_TRANSFER: ['VIEW_TRANSFERS']
+  CREATE_TRANSFER: ['VIEW_TRANSFERS'], EDIT_TRANSFER: ['VIEW_TRANSFERS'], POST_TRANSFER: ['VIEW_TRANSFERS'], CANCEL_TRANSFER: ['VIEW_TRANSFERS'],
+  MANAGE_OPENING: ['VIEW_OPENING'], POST_OPENING: ['VIEW_OPENING']
 };
 
 const App = {
@@ -53,7 +58,7 @@ const App = {
     const arg = rest.join('/');
     const root = document.getElementById('page');
     document.getElementById('modalRoot').innerHTML = '';
-    const navId = id === 'movements' ? 'inventory' : id;
+    const navId = id === 'movements' ? 'inventory' : (id === 'adjust' || id === 'costs') ? 'opening' : id;
     document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('active', a.dataset.nav === navId));
     const nav = NAV.find(n => n.id === id) || NAV[0];
     if (!this.can(nav.perm)) {
