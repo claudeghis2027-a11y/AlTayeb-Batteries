@@ -97,7 +97,9 @@ function movementsTable(rows, withItem) {
       <td>${UI.esc(m.FromName || '—')}</td>
       <td>${UI.esc(m.ToName || '—')}</td>
       <td class="num">${UI.qty(m.Quantity)}</td>
-      <td class="mono">${m.ReferenceType === 'TRANSFER' ? `<a href="#transfers/${UI.esc(m.ReferenceID)}" data-close>${UI.esc(m.ReferenceNo)}</a>` : UI.esc(m.ReferenceNo || '—')}</td>
+      <td class="mono">${m.ReferenceType === 'TRANSFER' ? `<a href="#transfers/${UI.esc(m.ReferenceID)}" data-close>${UI.esc(m.ReferenceNo)}</a>`
+        : m.ReferenceType === 'OPENING' ? `<a href="#opening/${UI.esc(m.ReferenceID)}" data-close>${UI.esc(m.ReferenceNo)}</a>`
+        : m.ReferenceType === 'OPENING_ADJ' ? `<a href="#adjust/${UI.esc(m.ReferenceID)}" data-close>${UI.esc(m.ReferenceNo)}</a>` : UI.esc(m.ReferenceNo || '—')}</td>
       <td>${UI.esc(m.UserName)}</td></tr>`).join('')}</tbody></table></div>`;
 }
 
@@ -113,7 +115,9 @@ async function openItemStock(itemId) {
   const body = m.root.querySelector('.modal-body');
   const err = body.querySelector('[data-ref=err]');
   body.innerHTML = `
-    <p class="muted">الكود: <span class="mono">${UI.esc(d.item.ItemCode)}</span></p>
+    <p class="muted">الكود: <span class="mono">${UI.esc(d.item.ItemCode)}</span> · متوسط التكلفة:
+      ${d.item.CostStatus === 'UNKNOWN_COST' ? '<span class="warn">غير معروفة (رصيد افتتاحي بدون تكلفة)</span>'
+        : d.item.CostStatus === 'KNOWN' ? `<b>${UI.money(d.item.AverageCost)}</b>` : 'لا توجد بيانات تكلفة'}</p>
     <div class="stats stats-5">${d.locations.map(l => `<div class="stat"><span>${UI.esc(l.LocationName)}</span><b>${UI.qty(d.qty[l.LocationID])}</b></div>`).join('')}
       <div class="stat stat-total"><span>الإجمالي</span><b>${UI.qty(d.total)}</b></div></div>
     <h4 class="sub-head">حركة الصنف</h4>
