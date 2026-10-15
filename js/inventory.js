@@ -99,7 +99,9 @@ function movementsTable(rows, withItem) {
       <td class="num">${UI.qty(m.Quantity)}</td>
       <td class="mono">${m.ReferenceType === 'TRANSFER' ? `<a href="#transfers/${UI.esc(m.ReferenceID)}" data-close>${UI.esc(m.ReferenceNo)}</a>`
         : m.ReferenceType === 'OPENING' ? `<a href="#opening/${UI.esc(m.ReferenceID)}" data-close>${UI.esc(m.ReferenceNo)}</a>`
-        : m.ReferenceType === 'OPENING_ADJ' ? `<a href="#adjust/${UI.esc(m.ReferenceID)}" data-close>${UI.esc(m.ReferenceNo)}</a>` : UI.esc(m.ReferenceNo || '—')}</td>
+        : m.ReferenceType === 'OPENING_ADJ' ? `<a href="#adjust/${UI.esc(m.ReferenceID)}" data-close>${UI.esc(m.ReferenceNo)}</a>`
+        : m.ReferenceType === 'PURCHASE' ? `<a href="#purchases/${UI.esc(m.ReferenceID)}" data-close>${UI.esc(m.ReferenceNo)}</a>`
+        : m.ReferenceType === 'SALE' ? `<a href="#sales/${UI.esc(m.ReferenceID)}" data-close>${UI.esc(m.ReferenceNo)}</a>` : UI.esc(m.ReferenceNo || '—')}</td>
       <td>${UI.esc(m.UserName)}</td></tr>`).join('')}</tbody></table></div>`;
 }
 
