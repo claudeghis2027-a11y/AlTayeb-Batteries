@@ -74,7 +74,8 @@ const App = {
     try { page = nav.page(); } catch (e) { page = null; }
     if (!page || typeof page.mount !== 'function') {
       root.innerHTML = `<div class="empty err">تعذر فتح صفحة "${UI.esc(nav.label)}": ملف الواجهة الخاص بها لم يُحمّل.<br>
-        تأكد أن الملف موجود داخل فولدر js على GitHub بنفس الاسم، ثم حدّث الصفحة بـ Ctrl+F5.</div>`;
+        تأكد أن الملف موجود داخل فولدر js على GitHub بنفس الاسم، ثم حدّث الصفحة بـ Ctrl+F5.
+        ${(window.__loadErrors || []).length ? `<br><br>السبب كما سجله المتصفح:<br>${window.__loadErrors.map(x => UI.esc(x)).join('<br>')}` : ''}</div>`;
       return;
     }
     page.mount(root, arg);
