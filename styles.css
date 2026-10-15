@@ -198,3 +198,20 @@ tr.line-msg td { padding: 0 12px 10px; color: var(--danger); font-size: 14px; }
 label.check { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); cursor: pointer; }
 label.check input { width: 18px; height: 18px; accent-color: var(--yellow); }
 .ob-totals small b { font-size: inherit; color: var(--text); }
+
+/* ---------- المشتريات والمبيعات ---------- */
+label.inline { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+.ok-text { color: var(--ok); }
+.inv-preview { background: #fff; color: #111; border-radius: var(--radius); padding: 28px 32px; max-width: 900px; }
+.inv-preview .inv-head { display: flex; justify-content: space-between; border-bottom: 3px solid #111; padding-bottom: 10px; margin-bottom: 12px; }
+.inv-preview .inv-shop { font-size: 26px; font-weight: 700; font-family: var(--font-brand); }
+.inv-preview .inv-sub { color: #444; }
+.inv-preview .inv-meta div, .inv-preview .inv-info div, .inv-preview .inv-totals div { display: flex; gap: 8px; }
+.inv-preview .inv-meta span, .inv-preview .inv-info span, .inv-preview .inv-totals span { color: #555; min-width: 110px; }
+.inv-preview .inv-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 12px; }
+.inv-preview .inv-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+.inv-preview .inv-table th, .inv-preview .inv-table td { border: 1px solid #999; padding: 6px 8px; color: #111; background: #fff; position: static; }
+.inv-preview .inv-table th { background: #eee; }
+.inv-preview .inv-bottom { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; align-items: start; }
+.inv-preview .inv-totals div { justify-content: space-between; border-bottom: 1px solid #ccc; padding: 6px 0; }
+.inv-preview .inv-debt b { color: #b00; }
