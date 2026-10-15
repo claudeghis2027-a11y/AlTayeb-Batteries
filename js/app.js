@@ -9,6 +9,8 @@ const NAV = [
   { id: 'inventory', label: 'المخزون',      perm: 'VIEW_INVENTORY', page: () => InventoryPage },
   { id: 'movements', label: 'حركة المخزون', perm: 'VIEW_INVENTORY', page: () => MovementsPage, hidden: true },
   { id: 'transfers', label: 'إذن نقل / صرف', perm: 'VIEW_TRANSFERS', page: () => TransfersPage },
+  { id: 'purchases', label: 'المشتريات', perm: 'VIEW_PURCHASES', page: () => PurchasesPage },
+  { id: 'sales',     label: 'فواتير البيع', perm: 'VIEW_SALES', page: () => SalesPage },
   { id: 'opening',   label: 'أرصدة أول المدة', perm: 'VIEW_OPENING', page: () => OpeningPage },
   { id: 'balances',  label: 'أرصدة العملاء والموردين', perm: 'VIEW_PARTY_BALANCES', page: () => BalancesPage },
   { id: 'adjust',    label: 'تسوية أرصدة أول المدة', perm: 'VIEW_OPENING', page: () => AdjustPage, hidden: true },
@@ -23,7 +25,8 @@ const IMPLIES = {
   MANAGE_ITEMS: ['VIEW_ITEMS'], MANAGE_CUSTOMERS: ['VIEW_CUSTOMERS'], MANAGE_SUPPLIERS: ['VIEW_SUPPLIERS'],
   MANAGE_EMPLOYEES: ['VIEW_EMPLOYEES'], MANAGE_USERS: ['VIEW_USERS'],
   CREATE_TRANSFER: ['VIEW_TRANSFERS'], EDIT_TRANSFER: ['VIEW_TRANSFERS'], POST_TRANSFER: ['VIEW_TRANSFERS'], CANCEL_TRANSFER: ['VIEW_TRANSFERS'],
-  MANAGE_OPENING: ['VIEW_OPENING'], POST_OPENING: ['VIEW_OPENING']
+  MANAGE_OPENING: ['VIEW_OPENING'], POST_OPENING: ['VIEW_OPENING'],
+  POST_PURCHASE: ['VIEW_PURCHASES'], ISSUE_SALE: ['VIEW_SALES']
 };
 
 const App = {
