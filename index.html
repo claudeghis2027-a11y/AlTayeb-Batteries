@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261015a">
 </head>
 <body>
 
@@ -63,27 +63,36 @@
   <div id="modalRoot"></div>
   <div id="toastRoot" class="toasts" aria-live="polite"></div>
 
-  <script src="js/config.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/crud.js"></script>
-  <script src="js/dashboard.js"></script>
-  <script src="js/items.js"></script>
-  <script src="js/customers.js"></script>
-  <script src="js/suppliers.js"></script>
-  <script src="js/employees.js"></script>
-  <script src="js/users.js"></script>
-  <script src="js/settings.js"></script>
-  <script src="js/audit.js"></script>
-  <script src="js/inventory.js"></script>
-  <script src="js/transfers.js"></script>
-  <script src="js/opening.js"></script>
-  <script src="js/balances.js"></script>
-  <script src="js/adjustments.js"></script>
-  <script src="js/xlsx.js"></script>
-  <script src="js/purchases.js"></script>
-  <script src="js/sales.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/app.js"></script>
+  <!-- يسجل أي ملف لم يُحمّل أو فيه خطأ، ليظهر سببه على الشاشة بدل صفحة فارغة -->
+  <script>
+    window.__loadErrors = [];
+    window.addEventListener('error', function (e) {
+      var t = e.target;
+      if (t && t.tagName === 'SCRIPT') window.__loadErrors.push('تعذر تحميل الملف: ' + t.getAttribute('src'));
+      else if (e.message) window.__loadErrors.push(e.message + ' — ' + String(e.filename || '').split('/').pop() + ':' + e.lineno);
+    }, true);
+  </script>
+  <script src="js/config.js?v=20261015a"></script>
+  <script src="js/api.js?v=20261015a"></script>
+  <script src="js/ui.js?v=20261015a"></script>
+  <script src="js/crud.js?v=20261015a"></script>
+  <script src="js/dashboard.js?v=20261015a"></script>
+  <script src="js/items.js?v=20261015a"></script>
+  <script src="js/customers.js?v=20261015a"></script>
+  <script src="js/suppliers.js?v=20261015a"></script>
+  <script src="js/employees.js?v=20261015a"></script>
+  <script src="js/users.js?v=20261015a"></script>
+  <script src="js/settings.js?v=20261015a"></script>
+  <script src="js/audit.js?v=20261015a"></script>
+  <script src="js/inventory.js?v=20261015a"></script>
+  <script src="js/transfers.js?v=20261015a"></script>
+  <script src="js/opening.js?v=20261015a"></script>
+  <script src="js/balances.js?v=20261015a"></script>
+  <script src="js/adjustments.js?v=20261015a"></script>
+  <script src="js/xlsx.js?v=20261015a"></script>
+  <script src="js/purchases.js?v=20261015a"></script>
+  <script src="js/sales.js?v=20261015a"></script>
+  <script src="js/auth.js?v=20261015a"></script>
+  <script src="js/app.js?v=20261015a"></script>
 </body>
 </html>
