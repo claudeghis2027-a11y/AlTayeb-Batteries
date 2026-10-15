@@ -69,7 +69,15 @@ const App = {
       return;
     }
     root.innerHTML = '';
-    nav.page().mount(root, arg);
+    // لو ملف الصفحة لم يُحمّل (مثلًا 404 على GitHub) نعرض رسالة واضحة بدل صفحة فارغة
+    let page = null;
+    try { page = nav.page(); } catch (e) { page = null; }
+    if (!page || typeof page.mount !== 'function') {
+      root.innerHTML = `<div class="empty err">تعذر فتح صفحة "${UI.esc(nav.label)}": ملف الواجهة الخاص بها لم يُحمّل.<br>
+        تأكد أن الملف موجود داخل فولدر js على GitHub بنفس الاسم، ثم حدّث الصفحة بـ Ctrl+F5.</div>`;
+      return;
+    }
+    page.mount(root, arg);
     root.focus();
   }
 };
